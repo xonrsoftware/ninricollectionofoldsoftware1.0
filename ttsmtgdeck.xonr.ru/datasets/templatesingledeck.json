@@ -1,0 +1,170 @@
+{
+    "SaveName": "MTG DECK",
+    "GameMode": "MTG DECK",
+    "Date": "7/16/2017 4:59:23 PM",
+    "Table": "Table_RPG",
+    "Sky": "Sky_Museum",
+    "Note": "",
+    "Rules": "",
+    "LuaScript": "",
+    "LuaScriptState": "",
+    "Hands": {
+        "Enable": true,
+        "DisableUnused": false,
+        "Hiding": 0,
+        "HandTransforms": [
+            {
+                "Color": "Red",
+                "Transform": {
+                    "posX": -15.1107731,
+                    "posY": 4.81034231,
+                    "posZ": -20.1076221,
+                    "rotX": 0,
+                    "rotY": 0,
+                    "rotZ": 0,
+                    "scaleX": 11.771986,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.87123871
+                }
+            },
+            {
+                "Color": "Yellow",
+                "Transform": {
+                    "posX": -30.2150211,
+                    "posY": 4.81034231,
+                    "posZ": 10.17524,
+                    "rotX": 0,
+                    "rotY": 90,
+                    "rotZ": 0,
+                    "scaleX": 11.6554251,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.919951
+                }
+            },
+            {
+                "Color": "Purple",
+                "Transform": {
+                    "posX": 30.2511711,
+                    "posY": 4.81034231,
+                    "posZ": 9.59069252,
+                    "rotX": 0,
+                    "rotY": 270,
+                    "rotZ": 0,
+                    "scaleX": 11.6554193,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.919951
+                }
+            },
+            {
+                "Color": "Blue",
+                "Transform": {
+                    "posX": 15.4749184,
+                    "posY": 4.81034231,
+                    "posZ": 19.8365288,
+                    "rotX": 0,
+                    "rotY": 179.8,
+                    "rotZ": 0,
+                    "scaleX": 11.7719727,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.87124
+                }
+            },
+            {
+                "Color": "White",
+                "Transform": {
+                    "posX": 15.1961212,
+                    "posY": 4.81034231,
+                    "posZ": -20.1400986,
+                    "rotX": 0,
+                    "rotY": 0,
+                    "rotZ": 0,
+                    "scaleX": 11.7719679,
+                    "scaleY": 9.17449951,
+                    "scaleZ": 4.87123871
+                }
+            },
+            {
+                "Color": "Green",
+                "Transform": {
+                    "posX": -15.1927719,
+                    "posY": 4.81034231,
+                    "posZ": 19.787817,
+                    "rotX": 0,
+                    "rotY": 180.000076,
+                    "rotZ": 0,
+                    "scaleX": 11.7719679,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.87123871
+                }
+            },
+            {
+                "Color": "Pink",
+                "Transform": {
+                    "posX": 30.1035728,
+                    "posY": 4.81034231,
+                    "posZ": -8.449126,
+                    "rotX": 0,
+                    "rotY": 270,
+                    "rotZ": 0,
+                    "scaleX": 11.6554174,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.919951
+                }
+            },
+            {
+                "Color": "Orange",
+                "Transform": {
+                    "posX": -30.247818,
+                    "posY": 4.81034231,
+                    "posZ": -8.822588,
+                    "rotX": 0,
+                    "rotY": 90,
+                    "rotZ": 0,
+                    "scaleX": 11.65543,
+                    "scaleY": 9.174497,
+                    "scaleZ": 4.919951
+                }
+            }
+        ]
+    },
+    "DrawImage": "",
+    "VectorLines": [],
+    "ObjectStates": [
+        {
+            "Name": "DeckCustom",
+            "Transform": {
+                "posX": 18.1678772,
+                "posY": 1.81456578,
+                "posZ": -7.78582048,
+                "rotX": 2.06952564e-6,
+                "rotY": 179.957825,
+                "rotZ": 180.000015,
+                "scaleX": 1,
+                "scaleY": 1,
+                "scaleZ": 1
+            },
+            "Nickname": "",
+            "Description": "",
+            "ColorDiffuse": {
+                "r": 0.713235259,
+                "g": 0.713235259,
+                "b": 0.713235259
+            },
+            "Locked": false,
+            "Grid": true,
+            "Snap": true,
+            "Autoraise": true,
+            "Sticky": true,
+            "Tooltip": true,
+            "GridProjection": false,
+            "SidewaysCard": false,
+            "DeckIDs": "",
+            "CustomDeck": "CDECKREPLACE",
+            "LuaScript": "",
+            "LuaScriptState": "",
+            "ContainedObjects": "",
+			"GUID": "65fe7b"
+        }
+    ],
+    "DecalPallet": []
+}

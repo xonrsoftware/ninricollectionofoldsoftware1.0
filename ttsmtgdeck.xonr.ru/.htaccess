@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^generatedeck$ generate/generate.php
+RewriteRule ^generateboosters$ generate/generatedraft.php

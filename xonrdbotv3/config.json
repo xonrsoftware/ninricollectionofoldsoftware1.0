@@ -1,0 +1,5 @@
+{
+  "token": "Bot token to authentificate your bot",
+  "steamAPIKey": "заменить",
+  "prefix": "TTTT"
+}

@@ -1,0 +1,32 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ws = new WebSocket("wss://dlttsmods.ninri.ru/socket");
+ 
+// и навешивает на новый объект три колл-бека:
+var timerID = 0; 
+function keepAlive() { 
+    var timeout = 20000;  
+    if (ws.readyState == ws.OPEN) {  
+        ws.send('');  
+    }  
+    timerId = setTimeout(keepAlive, timeout);  
+}  
+function cancelKeepAlive() {  
+    if (timerId) {  
+        clearTimeout(timerId);  
+    }  
+} 
+// первый вызовется, когда соединение будет установлено:
+ws.onopen = function() { 
+ws.send(779900330); 
+keepAlive();
+};
+
+// второй - когда соединено закроется
+ws.onclose = function() { alert("Connection closed...");cancelKeepAlive(); };
+ 
+// и, наконец, третий - каждый раз, когда браузер получает какие-то данные через веб-сокет
+ws.onmessage = function(evt) { $("#msg").append("<p>"+evt.data+"</p>"); };
+ 
+</script>
+<div id="msg"></div>

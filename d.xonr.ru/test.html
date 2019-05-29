@@ -1,0 +1,24 @@
+<head>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<script>
+$.ajax({
+    type: 'POST',
+    url: 'https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v0001/',
+    crossDomain: true,
+    data: "itemcount=1&publishedfileids[0]=1688093459&format=json",
+    dataType: 'json',
+    success: function(responseData, textStatus, jqXHR) {
+        alert(responseData);
+    },
+    error: function (responseData, textStatus, errorThrown) {
+        alert('POST failed.');
+    }
+});
+</script>
+<body>
+
+</body>

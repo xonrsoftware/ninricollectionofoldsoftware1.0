@@ -1,0 +1,559 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Импортировать MTG колоду в Tabletop Simulator</title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-103321402-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="dropzone.css">
+<link rel="stylesheet" href="basic.css">
+<link rel="icon" type="image/png" href="/favicon.png" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="dropzone.js"></script>
+<script src="main.js"></script>
+<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Nav -->
+<nav id="nav">
+<ul>
+<li><a href="#upload" class="active">Генерация</a></li>
+<li><a href="#setlist">Список сетов</a></li>
+<li><a href="#docs">Документация</a></li>
+<li><a href="#howtouse">Как импортировать?</a></li>
+</ul>
+</nav>
+
+<!-- Main -->
+<div id="main">
+
+<!-- Introduction -->
+<section id="upload" class="main">
+<header class="major">
+<h2>Сгенерировать колоду</h2>
+</header>
+<div id="dropzone">
+<form action="/generate/generate.php" class="dropzone dz-clickable" id="dropzoneform">
+<div class="dz-message">Перетащите файлы в это окно или нажмите на него.
+<br> <span class="note">(Файлы должны быть в формате MTGO, таблицы CSV, произвольный формат с заметками)</span>
+
+</div>
+</form>
+</div>
+<header class="major">
+<h2>Сгенерировать бустеры</h2>
+</header>
+<ul class="statistics" id="errorboosters" style="display:none;">
+<li class="style1" id="errorboostersinner">
+</li>
+</ul>
+<div class="sk-folding-cube" id="boosterloader" style="display:none;">
+  <div class="sk-cube1 sk-cube"></div>
+  <div class="sk-cube2 sk-cube"></div>
+  <div class="sk-cube4 sk-cube"></div>
+  <div class="sk-cube3 sk-cube"></div>
+</div>
+<form id="generateboosters" action="/generate/generatedraft.php" method="post">
+Выберите сет:<br>
+<select name="set">
+  <option value="[HOU]">Час Разрушения / Hour of Devastation [HOU]</option>
+  <option value="[AKH]">Амонхет / Amonkhet [AKH]</option>
+  <option value="[AER]">«Эфирный Бунт» / Aether Revolt [AER]</option>
+  <option value="[KLD]">«Каладеш» / Kaladesh [KLD]</option>
+  <option value="[EMN]">Луна Кошмаров / Eldritch Moon [EMN]</option>
+  <option value="[SOI]">Тени над Иннистрадом / Shadows over Innistrad [SOI]</option>
+  <option value="[OGW]">Клятва Стражей / Oath of the Gatewatch [OGW]</option>
+  <option value="[BFZ]">Битва за Зендикар​ / Battle for Zendikar [BFZ]</option>
+  </select><br>
+Количество бустеров:<br>
+<input type="text" name="count" value="12" size="40"><br>
+Добавить землю из сета? (Укажите сет, например: [SOI])<br>
+<input type="text" name="land" size="40" value="[KLD]"><br>
+<input type="submit" id="smboosters" style="width:100%;" value="Сгенерировать бустеры">
+</form>
+<header class="major">
+<h2>Информация</h2>
+</header>									
+Бустеры используются в форматах: <a href="//magic.wizards.com/ru/game-info/gameplay/formats/booster-draft" target="_blank">ФОРМАТ «ВЫБОР ИЗ БУСТЕРОВ»</a>, <a href="//magic.wizards.com/ru/game-info/gameplay/formats/sealed-deck" target="_blank">ФОРМАТ «ЗАПЕЧАТАННАЯ КОЛОДА»</a>.
+<hr>
+										<h3>Обычный бустер</h3>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>10</td>
+														<td>Common</td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Uncommon</td>
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Rare</td>
+													</tr>
+												</tbody>
+											</table>
+											Шанс 1 к 8 что Mythic Rare заменит Rare.
+										</div>
+										<br>
+										<h3>Тени над Иннистрадом / Луна Кошмаров бустер</h3>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>9</td>
+														<td>Common</td>
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Двусторонняя карта Common / Uncommon (Шанс 1 к 8, что это будет Uncommon)</td>
+													</tr>
+													<tr>
+														<td>3</td>
+														<td>Uncommon</td>
+													</tr>
+													<tr>
+														<td>1</td>
+														<td>Rare</td>
+													</tr>
+												</tbody>
+											</table>
+											Шанс 1 к 8 что еще одну карту Common заменит Двусторонняя карта Rare / Mythic Rare (Шанс 1 к 8, что это будет Mythic Rare).<br>
+											Шанс 1 к 8 что Mythic Rare заменит Rare.
+										</div>
+</section>
+<section id="setlist" class="main">
+<header class="major">
+<h2>Список готовых сетов</h2>
+</header>
+<div class="table-wrapper">
+<table>
+<tbody>
+<tr>
+<td>Час Разрушения / Hour of Devastation</td>
+<td>[HOU]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109269059">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>Амонхет / Amonkhet</td>
+<td>[AKH]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109344664">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>«Эфирный Бунт» / Aether Revolt</td>
+<td>[AER]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109374068">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>«Каладеш» / Kaladesh</td>
+<td>[KLD]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109397770">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>Луна Кошмаров / Eldritch Moon</td>
+<td>[EMN]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109412534">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>Тени над Иннистрадом / Shadows over Innistrad</td>
+<td>[SOI]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109426904">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>Клятва Стражей / Oath of the Gatewatch</td>
+<td>[OGW]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109438459">Steam Workshop</a></td>
+</tr>
+<tr>
+<td>Битва за Зендикар​ / Battle for Zendikar</td>
+<td>[BFZ]</td>
+<td><a target="_blank" href="https://steamcommunity.com/sharedfiles/filedetails/?id=1109449503">Steam Workshop</a></td>
+</tr>
+
+												</tbody>
+											</table>
+										</div>
+
+							</section>
+						<!-- First Section -->
+							<section id="docs" class="main">
+								<header class="major">
+									<h2>Документация</h2>
+								</header>	
+<h2>Список изменений</h2>	
+<blockquote>
+18.07.2017 - * - Тестирование.
+</blockquote>
+<hr>
+<p>	
+<strong>Важно:</strong><br>
+Если для карты не указан сет, тогда скрипт будет перебирать все доступные сеты начиная с самых новых.<br>
+Если вы редактируете .csv таблицу через блокнот и название карты содержит запятую, тогда это название следует обернуть в "", пример: "Jace, Architect of Thought", программы для редактирования таблиц делают это автоматически.<br>
+Сокращения сетов можно узнать на <a href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D0%B1%D0%BE%D1%80%D1%8B_%D0%B8_%D0%B8%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F_Magic:_The_Gathering" target="_blank">wikipedia</a>.<br>
+Переключение двусторонних карт осуществляется посредством нажатия 1 2 на клавиатуре. (не на NumPad)<br>
+Чтобы оппонент не видел смену состояния карты, требуется перевернуть карту в руке рубашкой вверх и только после этого сменить состояние.<br>
+<br>						
+Вы можете задать список сетов для скрипта используя параметр |SETS|, в этом случае скрипт будет искать карту в заданной вами последовательности сетов, пока не найдет карту.<br>
+Скрипт автоматически определяет язык ввода для карты.<br>
+Если возникла ошибка - напишите на форуме.<br>
+Ниже вы найдете примеры таблиц с возможностью их скачать.<br>	
+Land 1, Swamp 1 .... можно заменить на Plains Island Mountain Swamp Forest Wastes или |Plains| |Island| |Mountain| |Swamp| |Forest| |Wastes|<br>
+Равнина 1, Болото 1 .... можно заменить на Равнина Остров Гора Болото Лес Пустоши или |Равнина| |Остров| |Гора| |Болото| |Лес| |Пустоши|<br>
+Тогда скрипт сам добавит в вашу колоду земли с разным рисунком. <br>
+Протестированные сайты для импорта колоды:<br>
+<a target="_blank" href="https://tappedout.net">tappedout.net</a> -> MTGO (.dec)<br>
+<a target="_blank" href="https://deckstats.net">deckstats.net</a> -> Download as MTGO .txt<br>
+<a target="_blank" href="https://www.mtggoldfish.com">www.mtggoldfish.com</a> -> Download<br>
+<a target="_blank" href="https://magic.wizards.com/ru">magic.wizards.com</a> -> Иконка скачать, <a target="_blank" href="https://magic.wizards.com/en/articles/archive/news/hour-devastation-planeswalker-deck-lists-2017-07-05">пример</a> или <a target="_blank" href="https://magic.wizards.com/ru/articles/archive/news/%D0%BA%D0%BE%D0%BB%D0%BE%D0%B4%D1%8B-planeswalker-%D0%BE%D0%B2-%D0%B2%D1%8B%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%C2%AB%D1%87%D0%B0%D1%81-%D1%80%D0%B0%D0%B7%D1%80%D1%83%D1%88%D0%B5%D0%BD%D0%B8%D1%8F%C2%BB-2017-07-07">На Русском</a>.<br>
+</p>	
+									<ul class="actions">
+										<li><a target="_blank" href="https://www.xonr.ru/12/generator-kolod-bucterov/" class="button">Тема на форуме</a></li>
+										<li><a target="_blank" href="https://www.xonr.ru/obshiy-razdel/mecenatstvo/" class="button">Меценатство</a></li>
+									</ul>					
+<section>
+										<h2>Примеры таблиц</h2>
+<h3>В формате .DEC</h3>
+<pre><code>//NAME: Some Name
+
+//Lands
+4 Ipnu Rivulet
+5 Island
+2 Mountain
+4 Ramunap Ruins
+4 Spirebluff Canal
+3 Wandering Fumarole
+
+//Spells
+1 Abrade
+4 Censor
+3 Fevered Visions
+1 Hieroglyphic Illumination
+4 Insult // Injury
+4 Shock
+4 Strategic Planning
+2 Sweltering Suns
+3 Winds of Rebuke
+
+//Creatures
+4 Cryptic Serpent
+4 Curious Homunculus
+4 Enigma Drake
+
+//Sideboard
+SB: 3 Abrade
+SB: 3 Dispel
+SB: 1 Hieroglyphic Illumination
+SB: 2 Lightning Axe
+SB: 2 Negate
+SB: 1 Sweltering Suns
+SB: 2 Unsubstantiate
+SB: 1 Winds of Rebuke
+</code>
+<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn" download>Скачать .DEC</a>
+</pre>
+										<h3>В формате MTGO</h3>
+<pre><code>4 Ipnu Rivulet
+5 Island
+2 Mountain
+4 Ramunap Ruins
+4 Spirebluff Canal
+3 Wandering Fumarole
+1 Abrade
+4 Censor
+3 Fevered Visions
+1 Hieroglyphic Illumination
+4 Insult // Injury
+4 Shock
+4 Strategic Planning
+2 Sweltering Suns
+3 Winds of Rebuke
+4 Cryptic Serpent
+4 Curious Homunculus
+4 Enigma Drake
+
+3 Abrade
+3 Dispel
+1 Hieroglyphic Illumination
+2 Lightning Axe
+2 Negate
+1 Sweltering Suns
+2 Unsubstantiate
+1 Winds of Rebuke
+</code>
+<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn" download>Скачать .TXT</a>
+</pre>
+
+
+										<h3>Произвольный формат с заметками и заданными сетами</h3>
+<pre><code>// NOTE
+4 Ipnu Rivulet
+5 Island [KLD]
+2 Mountain [SOI]
+4 Ramunap Ruins
+4 Spirebluff Canal
+// NOTE
+3 Wandering Fumarole
+1 Abrade
+4 Censor
+3 Fevered Visions
+1 Hieroglyphic Illumination
+4 Insult // Injury
+4 Shock
+4 Strategic Planning
+2 Sweltering Suns
+3 Winds of Rebuke
+4 Cryptic Serpent
+4 Curious Homunculus
+4 Enigma Drake [AKH]
+// SIDEBOARD
+3 Abrade
+3 Dispel
+1 Hieroglyphic Illumination
+2 Lightning Axe
+2 Negate
+1 Sweltering Suns
+2 Unsubstantiate
+1 Winds of Rebuke
+</code>
+<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn" download>Скачать .TXT</a>
+</pre>
+
+										<h3>Произвольный формат на Русском</h3>
+<pre><code>// Заметка
+4 Речка Ипну
+5 Остров [KLD]
+2 Гора [SOI]
+4 Руины Рамунап
+4 Путь Крутошпилья
+// Заметка
+3 Бродячая Фумарола
+1 Истирание
+4 Цензура
+3 Лихорадочные Видения
+1 Светящиеся Иероглифы
+4 Оскорбление // Ранение
+4 Шок
+4 Стратегическое Планирование
+2 Знойные Солнца
+3 Ветра Укора
+4 Таинственный Змей
+4 Любопытный Гомункул
+4 Дрейк Загадок
+// На замену
+3 Истирание
+3 Рассеять
+1 Светящиеся Иероглифы
+2 Топор Молний
+2 Отвергнуть
+1 Знойные Солнца
+2 Лишить Основания
+1 Ветра Укора
+</code>
+<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn" download>Скачать .TXT</a>
+</pre>
+
+										<h3>С заданным сетом для каждой карты</h3>
+										<div class="table-wrapper">
+											<table>
+												<thead>
+													<tr>
+														<th>Количество</th>
+														<th>Название карты</th>
+														<th>Сет</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>4</td>
+														<td>Ipnu Rivulet</td>
+														<td>[HOU]</td>
+													</tr>
+													<tr>
+														<td>5</td>
+														<td>Island</td>
+														<td>[KLD]</td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Mountain</td>
+														<td>[SOI]</td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Ramunap Ruins</td>
+														<td>[HOU]</td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Spirebluff Canal</td>
+														<td>[KLD]</td>
+													</tr>
+												</tbody>
+											</table>
+											<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn">Скачать .CSV</a>
+										</div>
+
+										<h3>С общим списком сетов</h3>
+										<div class="table-wrapper">
+											<table class="alt">
+												<thead>
+													<tr>
+														<th>Количество</th>
+														<th>Название карты</th>
+														<th>Сет</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>|SETS|</td>
+														<td>[HOU],[KLD]</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Ipnu Rivulet</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>5</td>
+														<td>Island</td>
+														<td>[KLD]</td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Mountain</td>
+														<td>[SOI]</td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Ramunap Ruins</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Spirebluff Canal</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+											<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn">Скачать .CSV</a>
+										</div>
+										<h3>На Русском</h3>
+										<div class="table-wrapper">
+											<table class="alt">
+												<thead>
+													<tr>
+														<th>Количество</th>
+														<th>Название карты</th>
+														<th>Сет</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>|SETS|</td>
+														<td>[HOU],[KLD]</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Речка Ипну</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>5</td>
+														<td>Остров</td>
+														<td>[KLD]</td>
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>Гора</td>
+														<td>[SOI]</td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Руины Рамунап</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>4</td>
+														<td>Путь Крутошпилья</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+											<a href="/example/example.zip" target="_blank" class="button special icon fa-download simpledwntablebtn">Скачать .CSV</a>
+										</div>
+									</section>
+
+							</section>
+<section id="howtouse" class="main">
+<header class="major">
+<h2>Импортировать как сохраненный объект</h2>
+</header>
+<ol>
+													<li>Скопировать скачанный json файл в Мои Документы > My Games > Tabletop Simulator > Saves > Saved Objects</li>
+													<li>Начать игру / Присоединиться к игре (Для того что бы вставить сохраненный объект нужен Promote).</li>
+													<li>Перейти в меню сохраненных объектов (Objects > Saved Objects).</li>
+													<li>Перетащить колоду на игровое поле.</li>
+												</ol>
+
+<header class="major">
+<h2>Импортировать как сохранение</h2>
+</header>
+<ol>
+													<li>Скопировать скачанный json файл в Мои Документы > My Games > Tabletop Simulator > Saves</li>
+													<li>Начать игру / Присоединиться к игре (Для того что бы загрузить сохранение нужен Promote).</li>
+													<li>Перейти в меню сохранений (Games > Save & Load).</li>
+													<li>Загрузить сохранение с колодой.</li>
+													</ol>
+							</section>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>Информация</h2>
+							<dl class="alt">
+								<dt>Код</dt>
+								<dd>AVX - XONR.RU</dd>
+								<dt>Библиотеки</dt>
+								<dd>Dropzone.js</dd>
+								<dt>Изначальный дизайн</dt>
+								<dd>HTML5 UP</dd>
+								<dt>Abuse / Жалоба</dt>
+								<dd>abuse@xonr.ru</dd>
+							</dl>
+						</section>
+						<p class="copyright">&copy; <a target="_blank" href="https://www.xonr.ru">XONR.RU</a></p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

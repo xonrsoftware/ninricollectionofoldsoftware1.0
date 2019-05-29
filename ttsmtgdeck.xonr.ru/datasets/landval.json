@@ -1,0 +1,82 @@
+[
+    {
+        "[BFZ]": {
+            "maximumIsland": 9,
+            "maximumMountain": 9,
+            "maximumForest": 9,
+            "maximumPlains": 9,
+            "maximumSwamp": 9,
+            "maximumWastes": 0
+        }
+    },
+    {
+        "[OGW]": {
+            "maximumIsland": 0,
+            "maximumMountain": 0,
+            "maximumForest": 0,
+            "maximumPlains": 0,
+            "maximumSwamp": 0,
+            "maximumWastes": 4
+        }
+    },
+    {
+        "[SOI]": {
+            "maximumIsland": 3,
+            "maximumMountain": 3,
+            "maximumForest": 3,
+            "maximumPlains": 3,
+            "maximumSwamp": 3,
+            "maximumWastes": 0
+        }
+    },
+    {
+        "[EMN]": {
+            "maximumIsland": 0,
+            "maximumMountain": 0,
+            "maximumForest": 0,
+            "maximumPlains": 0,
+            "maximumSwamp": 0,
+            "maximumWastes": 0
+        }
+    },
+    {
+        "[KLD]": {
+            "maximumIsland": 3,
+            "maximumMountain": 3,
+            "maximumForest": 3,
+            "maximumPlains": 3,
+            "maximumSwamp": 3,
+            "maximumWastes": 0
+        }
+    },
+    {
+        "[AER]": {
+            "maximumIsland": 0,
+            "maximumMountain": 0,
+            "maximumForest": 0,
+            "maximumPlains": 0,
+            "maximumSwamp": 0,
+            "maximumWastes": 0
+        }
+    },
+    {
+        "[AKH]": {
+            "maximumIsland": 4,
+            "maximumMountain": 4,
+            "maximumForest": 4,
+            "maximumPlains": 4,
+            "maximumSwamp": 4,
+            "maximumWastes": 0
+        }
+    },
+    {
+        "[HOU]": {
+            "maximumIsland": 3,
+            "maximumMountain": 3,
+            "maximumForest": 3,
+            "maximumPlains": 3,
+            "maximumSwamp": 3,
+            "maximumWastes": 0
+        }
+    }
+]
